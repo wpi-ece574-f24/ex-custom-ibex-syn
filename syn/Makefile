@@ -14,6 +14,11 @@ PKG_PATHS = $(foreach file, $(PKG_FILES), -I$(dir $(file)))
 DVMACROS_PATH = $(foreach file, $(filter %/dv_fcov_macros.svh, $(fusesoc-deps)), -I$(dir $(file)))
 OUTFILES = $(foreach file, $(SYN_FILES), generated/$(basename $(notdir $(file))).v)
 
+all:
+	@echo "Targets are:"
+	@echo "  code          Generate RTL code in Verilog"
+	@echo "  syn           Run Genus logic synthesis"
+
 syn: generated/top_rtl.v
 	BASENAME=top_rtl \
 	CLOCKPERIOD=10 \
@@ -21,6 +26,8 @@ syn: generated/top_rtl.v
 	TIMINGLIB=slow_vdd1v0_basicCells.lib \
 	VERILOG="$(OUTFILES)" \
 	genus -f genus_script.tcl
+
+code: generated/top_rtl.v
 
 generated/top_rtl.v:
 	mkdir -p generated

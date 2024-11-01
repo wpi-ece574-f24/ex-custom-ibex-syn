@@ -1,0 +1,573 @@
+
+#
+# Preferences
+#
+preferences set toolbar-CursorControl-WatchList {
+  usual
+  shown 0
+}
+preferences set plugin-enable-svdatabrowser-new 1
+preferences set plugin-enable-groupscope 0
+preferences set sb-callstack-in-window 0
+preferences set sb-display-values 1
+preferences set plugin-enable-interleaveandcompare 0
+preferences set plugin-enable-waveformfrequencyplot 0
+
+#
+# Mnemonic Maps
+#
+mmap new  -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new  -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+#
+# Design Browser windows
+#
+if {[catch {window new WatchList -name "Design Browser 1" -geometry 730x755+261+33}] != ""} {
+    window geometry "Design Browser 1" 730x755+261+33
+}
+window target "Design Browser 1" on
+browser using {Design Browser 1}
+browser set -scope  simulator::tb.dut.u_ibex_demo_system.u_myreg 
+browser set \
+    -signalsort name
+browser yview see  simulator::tb.dut.u_ibex_demo_system.u_myreg 
+browser timecontrol set -lock 0
+
+#
+# Waveform windows
+#
+if {[catch {window new WaveWindow -name "Waveform 1" -geometry 1920x1009+1920+23}] != ""} {
+    window geometry "Waveform 1" 1920x1009+1920+23
+}
+window target "Waveform 1" on
+waveform using {Waveform 1}
+waveform sidebar visibility partial
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 175 \
+    -units ps \
+    -valuewidth 75
+waveform baseline set -time 0
+
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.BranchPredictor[0:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.BranchTargetALU[0:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.BusSizeECC[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.DbgHwBreakNum[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.DbgTriggerEn[0:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.DmExceptionAddr[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.DmHaltAddr[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.DummyInstructions[0:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ICache[0:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ICacheECC[0:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ICacheScramble[0:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.LineSizeECC[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.Lockstep[0:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.MHPMCounterNum[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.MHPMCounterWidth[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.MemDataWidth[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.MemECC[0:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.NumAddrScrRounds[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.NumDiffRounds[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.PMPEnable[0:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.PMPGranularity[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.PMPNumRegions[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.RV32B
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.RV32E[0:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.RV32M
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.RegFile
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.RegFileDataWidth[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.RegFileECC[0:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.RegFileRdataMuxCheck[0:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.RegFileWrenCheck[0:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ResetAll[0:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.RndCnstIbexKey[127:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.RndCnstIbexNonce[63:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.RndCnstLfsrPerm[159:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.RndCnstLfsrSeed[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.SecureIbex[0:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.TagSizeECC[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.WritebackStage[0:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.alert_major_bus_o
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.alert_major_internal_o
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.alert_minor_o
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.boot_addr_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.clk
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.clk_i
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.clock_en
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.core_alert_major_bus
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.core_alert_major_internal
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.core_alert_minor
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.core_busy_d[3:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.core_busy_q[3:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.core_sleep_o
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.crash_dump_o[159:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.data_addr_o[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.data_be_o[3:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.data_err_i
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.data_gnt_i
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.data_rdata_core[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.data_rdata_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.data_rdata_intg_i[6:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.data_req_o
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.data_rvalid_i
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.data_wdata_core[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.data_wdata_intg_o[6:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.data_wdata_o[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.data_we_o
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.debug_req_i
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.double_fault_seen_o
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.dummy_instr_id
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.dummy_instr_wb
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.fetch_enable_buf[3:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.fetch_enable_i[3:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.hart_id_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_ADDR_W[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_BUS_BYTES[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_BUS_SIZE[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_IC_INDEX_W[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_IC_LINE_BEATS[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_IC_LINE_BYTES[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_IC_LINE_SIZE[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_IC_LINE_W[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_IC_NUM_LINES[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_IC_NUM_WAYS[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_IC_SIZE_BYTES[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_IC_TAG_SIZE[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_IbexMuBiOff[3:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_LfsrWidth[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_RndCnstIbexKeyDefault[127:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_RndCnstIbexNonceDefault[63:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_RndCnstLfsrPermDefault[159:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_RndCnstLfsrSeedDefault[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_SCRAMBLE_KEY_W[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ibex_pkg_SCRAMBLE_NONCE_W[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ic_data_addr[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ic_data_rdata[127:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ic_data_req[1:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ic_data_wdata[63:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.ic_data_write
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.ic_scr_key_req
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ic_tag_addr[7:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ic_tag_rdata[43:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ic_tag_req[1:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ic_tag_wdata[21:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.ic_tag_write
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.instr_addr_o[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.instr_err_i
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.instr_gnt_i
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.instr_rdata_core[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.instr_rdata_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.instr_rdata_intg_i[6:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.instr_req_o
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.instr_rvalid_i
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.irq_external_i
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.irq_fast_i[14:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.irq_nm_i
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.irq_pending
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.irq_software_i
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.irq_timer_i
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.lockstep_alert_major_bus
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.lockstep_alert_major_internal
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.lockstep_alert_minor
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.prim_secded_pkg_SecdedInv3932ZeroWord[38:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.ram_cfg_i[9:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.rf_alert_major_internal
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.rf_raddr_a[4:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.rf_raddr_b[4:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.rf_rdata_a_ecc[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.rf_rdata_a_ecc_buf[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.rf_rdata_b_ecc[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.rf_rdata_b_ecc_buf[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.rf_waddr_wb[4:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.rf_wdata_wb_ecc[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.rf_we_wb
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.rst_ni
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.scan_rst_ni
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.scramble_key_i[127:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.scramble_key_q[127:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.scramble_key_valid_d
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.scramble_key_valid_i
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.scramble_key_valid_q
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.scramble_nonce_i[63:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_top.scramble_nonce_q[63:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.scramble_req_d
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.scramble_req_o
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.scramble_req_q
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_top.test_en_i
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_myreg.AddrWidth[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_myreg.MYREG_REG1[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_myreg.MYREG_REG2[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_myreg.RegAddr[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_myreg._sv2v_0
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_myreg.clk_i
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_myreg.device_addr_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_myreg.device_be_i[3:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_myreg.device_rdata_o[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_myreg.device_req_i
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_myreg.device_rvalid_o
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_myreg.device_wdata_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_myreg.device_we_i
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_myreg.reg1_data[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_myreg.reg1_rd
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_myreg.reg1_wr
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_myreg.reg2_data[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_myreg.reg2_rd
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_myreg.reg2_wr
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_myreg.reg_addr[7:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb.dut.u_ibex_demo_system.u_myreg.rst_ni
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb.dut.u_ibex_demo_system.u_myreg.unused_device_addr[23:0]}
+	} ]
+
+waveform xview limits 0 1372544ps
+
+#
+# Waveform Window Links
+#
+
+#
+# Console windows
+#
+console set -windowname Console
+window geometry Console 600x250+190+213
+
+#
+# Layout selection
+#
