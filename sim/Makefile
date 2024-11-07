@@ -20,6 +20,7 @@ all:
 	@echo "Targets are:"
 	@echo "  code          Generate RTL code in Verilog"
 	@echo "  sim           Run RTL simulation"
+	@echo "  clean         Remove intermediate files"
 
 code: generated/top_rtl.v
 	echo $(OUTFILES) >file.list
@@ -47,5 +48,5 @@ sim: $(APP)
 
 
 clean:
-	rm -rf file.list generated prim*sv prim*svh xcelium.d xrun.* *~
+	rm -rf file.list generated prim*sv prim*svh xcelium.d xrun.* *~ memory.bin memory.hex waves.shm
 
